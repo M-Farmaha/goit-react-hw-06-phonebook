@@ -20,7 +20,7 @@ export const ContactItem = ({ contact }) => {
       <DeleteButton
         type="button"
         id={contact.id}
-        onClick={e => dispatch(deleteContact(e.target.id))}
+        onClick={() => dispatch(deleteContact(contact.id))}
       >
         <DeleteIcon />
       </DeleteButton>
