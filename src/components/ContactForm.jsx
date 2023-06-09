@@ -39,26 +39,26 @@ export const ContactForm = () => {
 
   return (
     <Form onSubmit={handleSubmit} autoComplete="off">
-      <Label htmlFor={'inputNameId'}>Name</Label>
+      <Label htmlFor={'name'}>Name</Label>
       <Input
         type="text"
         name="name"
         value={name}
         onChange={e => setName(e.target.value)}
-        id={'inputNameId'}
-        pattern="^(?=.{1,20}$)[\p{L} '-]+$"
-        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+        id={'name'}
+        title="min 3, max 40 symbols"
+        pattern="^.{3,40}$"
         required
       />
-      <Label htmlFor={'inputNumberId'}>Number</Label>
+      <Label htmlFor={'number'}>Number</Label>
       <Input
         type="tel"
         name="number"
         value={number}
         onChange={e => setNumber(e.target.value)}
-        id={'inputNumberId'}
-        pattern="\+?\d{1,3}[-.\s]?\(?\d{1,3}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,6}"
-        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+        id={'number'}
+        title="Only figures and spaces, min 6, max 20 symbols"
+        pattern="[0-9\s]{6,20}"
         required
       />
       <Button type="submit">Add contact</Button>
