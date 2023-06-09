@@ -11,7 +11,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import storage from 'redux-persist/lib/storage';
 
 const reducer = combineReducers({
   contacts: contactsReducer,
@@ -35,9 +35,3 @@ export const store = configureStore({
     }),
 });
 export const persistor = persistStore(store);
-
-// export default () => {
-//   let store = createStore(persistedReducer);
-//   let persistor = persistStore(store);
-//   return { store, persistor };
-// };
