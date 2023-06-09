@@ -1,34 +1,21 @@
-import PropTypes, { func } from 'prop-types';
 import { ContactItem } from './ContactItem';
 import { ContactListWrap } from './styled';
+import { useSelector } from 'react-redux';
+import { getContacts, getFilter } from 'redux/selectors';
 
-export const ContactList = ({ contacts, filter, handleDelete }) => {
-  const lowerCaseFilter = filter.toLowerCase();
+export const ContactList = () => {
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
+
   const visibleContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(lowerCaseFilter)
+    contact.name.toLowerCase().includes(filter)
   );
 
   return (
-    visibleContacts.length !== 0 && (
-      <ContactListWrap>
-        {visibleContacts.map(contact => {
-          return (
-            <ContactItem key={contact.id} {...{ contact, handleDelete }} />
-          );
-        })}
-      </ContactListWrap>
-    )
+    <ContactListWrap>
+      {visibleContacts.map(contact => (
+        <ContactItem key={contact.id} contact={contact} />
+      ))}
+    </ContactListWrap>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  filter: PropTypes.string.isRequired,
-  handleDelete: func.isRequired,
 };

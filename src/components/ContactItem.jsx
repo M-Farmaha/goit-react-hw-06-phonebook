@@ -1,3 +1,6 @@
+import { useDispatch } from 'react-redux';
+import { deleteContact } from 'redux/slice';
+
 import PropTypes from 'prop-types';
 import {
   ContactItemWrap,
@@ -7,10 +10,8 @@ import {
   DeleteIcon,
 } from './styled';
 
-export const ContactItem = ({ contact, handleDelete }) => {
-  const handleDeleteIconClick = e => {
-    handleDelete(e.currentTarget.id);
-  };
+export const ContactItem = ({ contact }) => {
+  const dispatch = useDispatch();
 
   return (
     <ContactItemWrap>
@@ -19,7 +20,7 @@ export const ContactItem = ({ contact, handleDelete }) => {
       <DeleteButton
         type="button"
         id={contact.id}
-        onClick={handleDeleteIconClick}
+        onClick={e => dispatch(deleteContact(e.target.id))}
       >
         <DeleteIcon />
       </DeleteButton>
@@ -28,10 +29,9 @@ export const ContactItem = ({ contact, handleDelete }) => {
 };
 
 ContactItem.propTypes = {
-  handleDelete: PropTypes.func.isRequired,
   contact: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
   }),
 };
